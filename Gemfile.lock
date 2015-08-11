@@ -1,0 +1,14 @@
+PATH
+  remote: .
+  specs:
+    ingest (1.0.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ingest!
