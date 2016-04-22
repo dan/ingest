@@ -14,7 +14,6 @@ gem 'ingest', '~> 1.0.4'
 def import_episodes_from_rss!(rss_feed_url)
   parsed_feed = Ingest::Feed.fetch_and_parse(rss_feed_url)
   parsed_feed.items.sort_by(&:published_at).each do |item|
-    Rails.logger.info("Importing: #{episode.title}")
     episode = Episode.create(
       imported_guid:      item.guid,
       title:              item.title,
@@ -24,6 +23,7 @@ def import_episodes_from_rss!(rss_feed_url)
       explicit:           item.itunes_explicit,
       keywords:           item.itunes_keywords
     )
+    Rails.logger.info("Imported: #{episode.title}")
   end
 end
 ```
