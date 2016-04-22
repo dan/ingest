@@ -10,7 +10,7 @@ gem 'ingest', '~> 1.0.4'
 
 ## Example Usage for Importing a Bunch of Episodes from a Podcast RSS Feed
 
-```
+```ruby
 def import_episodes_from_rss!(rss_feed_url)
   parsed_feed = Ingest::Feed.fetch_and_parse(rss_feed_url)
   parsed_feed.items.sort_by(&:published_at).each do |item|
