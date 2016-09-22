@@ -10,9 +10,10 @@ Gem::Specification.new do |s|
   s.homepage    = "http://hivelogic.com"
   s.summary     = "A podcast RSS feed fetcher and parser."
   s.description = "A library designed to help fetch and parse podcast RSS feeds."
+  s.license     = 'MIT'
 
-  s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.files       = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
+  s.test_files  = Dir["test/**/*"]
 
   s.require_paths = ['lib']
 end

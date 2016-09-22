@@ -14,14 +14,13 @@ module Ingest
       content, etag = ''
 
       # Open the given URL and read the content and etag
-      open(url) do |source|
+      open(url, allow_redirections: :safe) do |source|
         content = source.read
         etag    = source.meta['etag']
       end
       
       # Parse the feed data
       rss = RSS::Parser.parse(content, false, false)
-
 
       # Create a new Feed
       feed = Ingest::Feed.new
