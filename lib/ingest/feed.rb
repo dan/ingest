@@ -77,12 +77,16 @@ module Ingest
         feed_item.itunes_block     = item.itunes_block
         feed_item.itunes_duration  = item.itunes_duration.content.to_s
         feed_item.itunes_explicit  = item.itunes_explicit
-        feed_item.itunes_keywords  = item.itunes_keywords.join(',')
         feed_item.itunes_subtitle  = item.itunes_subtitle
         feed_item.itunes_summary   = item.itunes_summary
         feed_item.link             = item.link
         feed_item.published_at     = item.pubDate
         feed_item.title            = item.title
+        if item.itunes_keywords.present?
+          feed_item.itunes_keywords  = item.itunes_keywords.join(',')
+        else
+          feed_item.itunes_keywords  = ''
+        end
 
         # Put the FeedItem into the Feed's items array
         feed.items << feed_item
