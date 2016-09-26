@@ -32,7 +32,9 @@ module Ingest
       feed.itunes_block         = rss.channel.itunes_block
       feed.itunes_explicit      = rss.channel.itunes_explicit
       feed.itunes_image         = rss.channel.itunes_image.href
-      feed.itunes_keywords      = rss.channel.itunes_keywords.join(',')
+      if rss.channel.itunes_keywords.present?
+        feed.itunes_keywords      = rss.channel.itunes_keywords.join(',')
+      end
       feed.itunes_new_feed_url  = rss.channel.itunes_new_feed_url
       feed.itunes_name          = rss.channel.itunes_owner.itunes_name
       feed.itunes_email         = rss.channel.itunes_owner.itunes_email
