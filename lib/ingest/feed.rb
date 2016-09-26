@@ -33,7 +33,7 @@ module Ingest
       feed.itunes_explicit      = rss.channel.itunes_explicit
       feed.itunes_image         = rss.channel.itunes_image.href
       if rss.channel.itunes_keywords.present?
-        feed.itunes_keywords      = rss.channel.itunes_keywords.join(',')
+        feed.itunes_keywords    = rss.channel.itunes_keywords.join(',')
       end
       feed.itunes_new_feed_url  = rss.channel.itunes_new_feed_url
       feed.itunes_name          = rss.channel.itunes_owner.itunes_name
@@ -68,26 +68,26 @@ module Ingest
         feed_item = Ingest::FeedItem.new
 
         # Assign values based on the RSS feed item
-        feed_item.author           = item.author
-        feed_item.content          = item.content_encoded
-        feed_item.description      = item.description
-        feed_item.enclosure_length = item.enclosure.length
-        feed_item.enclosure_type   = item.enclosure.type
-        feed_item.enclosure_url    = item.enclosure.url
-        feed_item.guid             = item.guid.content
-        feed_item.itunes_author    = item.itunes_author
-        feed_item.itunes_block     = item.itunes_block
-        feed_item.itunes_duration  = item.itunes_duration.content.to_s
-        feed_item.itunes_explicit  = item.itunes_explicit
-        feed_item.itunes_subtitle  = item.itunes_subtitle
-        feed_item.itunes_summary   = item.itunes_summary
-        feed_item.link             = item.link
-        feed_item.published_at     = item.pubDate
-        feed_item.title            = item.title
+        feed_item.author            = item.author
+        feed_item.content           = item.content_encoded
+        feed_item.description       = item.description
+        feed_item.enclosure_length  = item.enclosure.length
+        feed_item.enclosure_type    = item.enclosure.type
+        feed_item.enclosure_url     = item.enclosure.url
+        feed_item.guid              = item.guid.content
+        feed_item.itunes_author     = item.itunes_author
+        feed_item.itunes_block      = item.itunes_block
+        feed_item.itunes_explicit   = item.itunes_explicit
+        feed_item.itunes_subtitle   = item.itunes_subtitle
+        feed_item.itunes_summary    = item.itunes_summary
+        feed_item.link              = item.link
+        feed_item.published_at      = item.pubDate
+        feed_item.title             = item.title
+        if item.itunes_duration.present?
+          feed_item.itunes_duration = item.itunes_duration.content.to_s
+        end
         if item.itunes_keywords.present?
-          feed_item.itunes_keywords  = item.itunes_keywords.join(',')
-        else
-          feed_item.itunes_keywords  = ''
+          feed_item.itunes_keywords = item.itunes_keywords.join(',')
         end
 
         # Put the FeedItem into the Feed's items array
