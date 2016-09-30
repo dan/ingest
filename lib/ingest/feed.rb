@@ -71,9 +71,11 @@ module Ingest
         feed_item.author            = item.author
         feed_item.content           = item.content_encoded
         feed_item.description       = item.description
-        feed_item.enclosure_length  = item.enclosure.length
-        feed_item.enclosure_type    = item.enclosure.type
-        feed_item.enclosure_url     = item.enclosure.url
+        if item.enclosure.present?
+          feed_item.enclosure_length  = item.enclosure.length
+          feed_item.enclosure_type    = item.enclosure.type
+          feed_item.enclosure_url     = item.enclosure.url
+        end
         feed_item.guid              = item.guid.content
         feed_item.itunes_author     = item.itunes_author
         feed_item.itunes_block      = item.itunes_block
