@@ -71,7 +71,7 @@ module Ingest
 
         # Assign values based on the RSS feed item
         feed_item.author            = item.author
-        feed_item.content           = item.content_encoded
+        feed_item.content           = item.content
         feed_item.description       = item.description
         if item.enclosure.present?
           feed_item.enclosure_length  = item.enclosure.length
