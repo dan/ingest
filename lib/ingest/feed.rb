@@ -70,28 +70,32 @@ module Ingest
         feed_item = Ingest::FeedItem.new
 
         # Assign values based on the RSS feed item
-        feed_item.author            = item.author
-        feed_item.content           = item.content_encoded
-        feed_item.description       = item.description
+        feed_item.author              = item.author
+        feed_item.content             = item.content_encoded
+        feed_item.description         = item.description
         if item.enclosure.present?
           feed_item.enclosure_length  = item.enclosure.length
           feed_item.enclosure_type    = item.enclosure.type
           feed_item.enclosure_url     = item.enclosure.url
         end
-        feed_item.guid              = item.guid.content
-        feed_item.itunes_author     = item.itunes_author
-        feed_item.itunes_block      = item.itunes_block
-        feed_item.itunes_explicit   = item.itunes_explicit
-        feed_item.itunes_subtitle   = item.itunes_subtitle
-        feed_item.itunes_summary    = item.itunes_summary
-        feed_item.link              = item.link
-        feed_item.published_at      = item.pubDate
-        feed_item.title             = item.title
+        if item.guid.present?
+          feed_item.guid              = item.guid.content
+        else
+          feed_item.guid              = ""
+        end
+        feed_item.itunes_author       = item.itunes_author
+        feed_item.itunes_block        = item.itunes_block
+        feed_item.itunes_explicit     = item.itunes_explicit
+        feed_item.itunes_subtitle     = item.itunes_subtitle
+        feed_item.itunes_summary      = item.itunes_summary
+        feed_item.link                = item.link
+        feed_item.published_at        = item.pubDate
+        feed_item.title               = item.title
         if item.itunes_duration.present?
-          feed_item.itunes_duration = item.itunes_duration.content.to_s
+          feed_item.itunes_duration   = item.itunes_duration.content.to_s
         end
         if item.itunes_keywords.present?
-          feed_item.itunes_keywords = item.itunes_keywords.join(',')
+          feed_item.itunes_keywords   = item.itunes_keywords.join(',')
         end
 
         # Put the FeedItem into the Feed's items array
