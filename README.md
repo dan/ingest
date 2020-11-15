@@ -5,7 +5,7 @@ Ingest is a library designed to help fetch and parse podcast RSS feeds.
 Installation:
 
 ```
-gem 'ingest', '~> 1.0.4'
+gem 'ingest', '~> 1.2'
 ```
 
 ## Example Usage for Importing a Bunch of Episodes from a Podcast RSS Feed

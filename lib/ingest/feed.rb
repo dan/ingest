@@ -5,7 +5,7 @@ module Ingest
                   :itunes_explicit, :itunes_image, :itunes_keywords,
                   :itunes_new_feed_url, :itunes_name, :itunes_subtitle,
                   :itunes_summary, :language, :last_modified, :link,
-                  :managing_editor, :published_at, :title
+                  :managing_editor, :published_at, :title, :pdocast_locked, :podcast_locked_owner
 
     # Fetches and parses an iTunes RSS feed based on the given URL.
     # Returns a Feed
@@ -18,7 +18,7 @@ module Ingest
         content = source.read
         etag    = source.meta['etag']
       end
-      
+
       # Parse the feed data
       rss = RSS::Parser.parse(content, false, false)
 
@@ -47,7 +47,10 @@ module Ingest
       feed.managing_editor      = rss.channel.managingEditor
       feed.published_at         = rss.channel.pubDate
       feed.title                = rss.channel.title
-    
+
+      feed.podcast_locked_owner = rss.channel.podcast_locked.owner
+      feed.podcast_locked = rss.channel.podcast_locked
+
       # iTunes categories are special snowflakes
       feed.itunes_categories = {}
       rss.channel.itunes_categories.each do |category|
